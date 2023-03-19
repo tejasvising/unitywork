@@ -4,8 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.IO;
+using TMPro;
 public class Try : MonoBehaviour
 {
+    [SerializeField] Camera cam;
+    [SerializeField] TextMeshProUGUI disclaimer;
+    public TMP_InputField InputField;
+   // public Text input;
+    public Button button;
     // Start is called before the first frame update
     private Rigidbody rb;
  
@@ -39,6 +47,7 @@ public class Try : MonoBehaviour
 
     void Start()
     {
+       
         Sphere = GameObject.Find("FalseTarget");
         Targeted = GameObject.Find("Target");
        
@@ -55,15 +64,43 @@ public class Try : MonoBehaviour
      //   newfalseobjinlevel4 = GameObject.Instantiate(Sphere);
      //   newfalseobjinlevel4.SetActive(false);
         newTargetobjinlevel4 =GameObject.Instantiate(Targeted);
-        newTargetobjinlevel4.SetActive(false);
+      newTargetobjinlevel4.SetActive(false);
      //   newfalseobjinlevel5 = GameObject.Instantiate(Sphere);
      //   newfalseobjinlevel5.SetActive(false);
         newTargetobjinlevel5 = GameObject.Instantiate(Targeted);
-        newTargetobjinlevel5.SetActive(false);
-        Invoke("feedDog", 5);
-        
-    }
+         newTargetobjinlevel5.SetActive(false);
+       
+       
+        trb = Targeted.GetComponent<Rigidbody>();
+        rb = Sphere.GetComponent<Rigidbody>();
 
+        rigidbodyoffalsetarget2 = FalseTarget2.GetComponent<Rigidbody>();
+     
+       
+        //Invoke("feedDog", 5);
+    //  yield return  StartCoroutine(level1(x));
+      
+    }
+   public void buttonOnClick()
+    {
+       
+        ScoreManager.instance.onButton();
+        //input.DeactivateInputField();
+        InputField.gameObject.SetActive(false);
+        // Destroy(InputField.gameobject);
+        Destroy(button.gameObject);
+      
+        StartCoroutine(Colorchangeinstart(5f));
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+           
+        }
+    }
         void OnCollisionEnter(Collision collision)
     {
         
@@ -74,7 +111,7 @@ public class Try : MonoBehaviour
         // {
       //  reflectedObject.position = Vector3.Reflect(originalObject.position, Vector3.right);
         Vector3 tempVect = new Vector3(rb.velocity.x * -1, rb.velocity.y*-1 , rb.velocity.z*-1 );
-                rb.velocity = tempVect;
+                rb.velocity = -rb.velocity.normalized;
           //  }
           //  else
           //  {
@@ -85,10 +122,31 @@ public class Try : MonoBehaviour
            
        // }
     }
-   
+    public IEnumerator Colorchangeinstart(float pauseTime)
+    {
+
+        Targeted.GetComponent<Renderer>().material.color = Color.white;
+        float pauseEndTime = Time.realtimeSinceStartup + pauseTime;
+        Time.timeScale = 0f;
+        while (Time.realtimeSinceStartup < pauseEndTime)
+        {
+
+            yield return 0;
+        }
+        Time.timeScale = 1f;
+
+        Targeted.GetComponent<Renderer>().material.color = new Color(0.7710f, 0.9339f, 0.1533f, 1f);
+        rb.velocity = new Vector3(-1f, 0f, 1f);
+
+        rigidbodyoffalsetarget2.velocity = new Vector3(-1f, 0f, 1f);
+        //  rb2.velocity = new Vector3(-1f, 0f, 1f);
+        trb.velocity = new Vector3(-1f, 0f, 1f);
+        var x = 1f;
+        StartCoroutine(level1(x));
+    }
     public IEnumerator Colorchangeinlvl1(float pauseTime)
     {
-        Debug.Log("Started Coroutine at timestamp in new: " + Time.time);
+        
         Targeted.GetComponent<Renderer>().material.color = Color.white;
         float pauseEndTime = Time.realtimeSinceStartup + pauseTime;
         Time.timeScale = 0f;
@@ -98,8 +156,7 @@ public class Try : MonoBehaviour
             yield return 0;
         }
         Time.timeScale = 1f;
-        Debug.Log("Finished Coroutine at timestamp in new : " + Time.time);
-        Debug.Log("Done with my pause");
+        
         Targeted.GetComponent<Renderer>().material.color = new Color(0.7710f, 0.9339f, 0.1533f, 1f);
     }
     public IEnumerator Colorchangeinlvl2(float pauseTime)
@@ -115,8 +172,7 @@ public class Try : MonoBehaviour
             yield return 0;
         }
         Time.timeScale = 1f;
-        Debug.Log("Finished Coroutine at timestamp in new : " + Time.time);
-        Debug.Log("Done with my pause");
+        
 
         newTargetobjinlevel2.GetComponent<Renderer>().material.color = new Color(0.7710f, 0.9339f, 0.1533f, 1f);
         Targeted.GetComponent<Renderer>().material.color = new Color(0.7710f, 0.9339f, 0.1533f, 1f);
@@ -182,10 +238,10 @@ public class Try : MonoBehaviour
     }
     public void feedDog()
     {
-         Debug.Log("Now feeding Dog");
+
         //    rb = gameObject.GetComponent<Rigidbody>();
-       
-      
+
+        Debug.Log("iaminfeeddog");
        
        // Sphere2=GameObject.Find("Sphere2");
        
@@ -194,11 +250,11 @@ public class Try : MonoBehaviour
         rb = Sphere.GetComponent<Rigidbody>();
      
         rigidbodyoffalsetarget2 = FalseTarget2.GetComponent<Rigidbody>();
-        rb.velocity =new Vector3(1f,0f,-1f);
+        rb.velocity =new Vector3(-1f,0f,1f);
        
-        rigidbodyoffalsetarget2.velocity = new Vector3(1f, 0f, -1f);
+        rigidbodyoffalsetarget2.velocity = new Vector3(-1f, 0f, 1f);
         //  rb2.velocity = new Vector3(-1f, 0f, 1f);
-        trb.velocity = new Vector3(-1f, 0f, -1f);
+        trb.velocity = new Vector3(-1f, 0f, 1f);
         var x = 1f;
        
        
@@ -214,25 +270,26 @@ public class Try : MonoBehaviour
     public IEnumerator keepconstvelinlvl1(float pauseTime,float x)
   {
         //    Debug.Log("Inside PauseGame()");
-              Debug.Log("Started Coroutine at timestamp in new: " + Time.time);
+              
 
         float pauseEndTime = Time.realtimeSinceStartup + pauseTime;
     while (Time.realtimeSinceStartup < pauseEndTime)
      {
-            rb.velocity = rb.velocity.normalized * x;
+            Vector3 holdr = rb.velocity / rb.velocity.magnitude;
+            //  Vector3 tempVect = new Vector3(x, y * 0, z );
+            rb.velocity = holdr * x;
+            // rb.velocity = rb.velocity.normalized * x;
             trb.velocity = trb.velocity.normalized * x;
             rigidbodyoffalsetarget2.velocity = rigidbodyoffalsetarget2.velocity.normalized * x;
             yield return 0;
         }
 
-        Debug.Log("Finished Coroutine at timestamp in new : " + Time.time);
-        Debug.Log("Done with my pause");
+       
    
      }
     public IEnumerator keepconstvelinlvl2(float pauseTime, float x)
     {
-        //    Debug.Log("Inside PauseGame()");
-        Debug.Log("Started Coroutine at timestamp in new: " + Time.time);
+    
 
         float pauseEndTime = Time.realtimeSinceStartup + pauseTime;
         while (Time.realtimeSinceStartup < pauseEndTime)
@@ -245,14 +302,12 @@ public class Try : MonoBehaviour
             yield return 0;
         }
 
-        Debug.Log("Finished Coroutine at timestamp in new : " + Time.time);
-        Debug.Log("Done with my pause");
+      
 
     }
     public IEnumerator keepconstvelinlvl3(float pauseTime, float x)
     {
-        //    Debug.Log("Inside PauseGame()");
-        Debug.Log("Started Coroutine at timestamp in new: " + Time.time);
+ 
 
         float pauseEndTime = Time.realtimeSinceStartup + pauseTime;
         while (Time.realtimeSinceStartup < pauseEndTime)
@@ -267,15 +322,12 @@ public class Try : MonoBehaviour
             yield return 0;
         }
 
-        Debug.Log("Finished Coroutine at timestamp in new : " + Time.time);
-        Debug.Log("Done with my pause");
 
     }
    
     public IEnumerator keepconstvelinlvl5(float pauseTime, float x)
     {
-        //    Debug.Log("Inside PauseGame()");
-        Debug.Log("Started Coroutine at timestamp in new: " + Time.time);
+       
 
         float pauseEndTime = Time.realtimeSinceStartup + pauseTime;
         while (Time.realtimeSinceStartup < pauseEndTime)
@@ -294,14 +346,11 @@ public class Try : MonoBehaviour
             yield return 0;
         }
 
-        Debug.Log("Finished Coroutine at timestamp in new : " + Time.time);
-        Debug.Log("Done with my pause");
 
     }
     public IEnumerator keepconstvelinlvl4(float pauseTime, float x)
     {
-        //    Debug.Log("Inside PauseGame()");
-        Debug.Log("Started Coroutine at timestamp in new: " + Time.time);
+  
 
         float pauseEndTime = Time.realtimeSinceStartup + pauseTime;
         while (Time.realtimeSinceStartup < pauseEndTime)
@@ -318,30 +367,83 @@ public class Try : MonoBehaviour
             yield return 0;
         }
 
-        Debug.Log("Finished Coroutine at timestamp in new : " + Time.time);
-        Debug.Log("Done with my pause");
+        
 
     }
-    public IEnumerator PauseGame(float pauseTime)
+    public IEnumerator PauseGame(float pauseTime,float velocity)
     {
         //    Debug.Log("Inside PauseGame()");
-        Debug.Log("Started Coroutine at timestamp in new: " + Time.time);
+        if (velocity <= 6) pauseTime = 3f;
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+        var t = Time.realtimeSinceStartup;float responseTime=5f;
         Time.timeScale = 0f;
+        int cnt = 0;bool hitdone = false;
         float pauseEndTime = Time.realtimeSinceStartup + pauseTime;
         while (Time.realtimeSinceStartup < pauseEndTime)
         {
-           
+            if (Input.GetMouseButtonDown(0))
+            {
+                // Ray ray = cam.ViewportPointToRay(new Vector3(0.5f,0.5f));
+                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+                // Debug.Log(ray);
+                Debug.DrawRay(ray.origin, ray.direction * 1000, Color.green, 1000, true);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    cnt++;hitdone = true;
+                    Target target = hit.collider.gameObject.GetComponent<Target>();
+                    FalseTarget falsetarget = hit.collider.gameObject.GetComponent<FalseTarget>();
+                    if (cnt == 1) { responseTime = Time.realtimeSinceStartup - t; }
+                    
+                    if (falsetarget != null)
+                    {
+                        falsetarget.collide();
+                    }
+                    // Debug.Log(target);
+                    if (target != null)
+                    {
+                        // Destroy(target.gameObject);
+
+                        //score++;
+                        //  score++;
+                        //  scoreText.text = "Score:" + score;
+                        //target.Hit();
+
+                        ScoreManager.instance.AddPoint();
+                    }
+                }
+            }
+                ScoreManager.instance.displayhittime(Mathf.FloorToInt(Time.realtimeSinceStartup - t));
+          //  Debug.Log(Time.realtimeSinceStartup-t);
             yield return 0;
         }
+        ScoreManager.instance.WriteCSV(velocity, responseTime);
+        //  if(hitdone==false) ScoreManager.instance.WriteCSV(velocity, 5f);
+        ScoreManager.instance.resethittime();
         Time.timeScale = 1f;
-        Debug.Log("Finished Coroutine at timestamp in new : " + Time.time);
-        Debug.Log("Done with my pause");
+     
     }
-        public IEnumerator level1(float x)
+    IEnumerator ShowMessage(string message, float delay)
+    {
+        disclaimer.text = message;
+       disclaimer.enabled = true;
+        Time.timeScale = 0f;
+       
+        float pauseEndTime = Time.realtimeSinceStartup + 3f;
+        while (Time.realtimeSinceStartup < pauseEndTime)
+        {
+            yield return 0;
+        }
+            
+        Time.timeScale = 1f;
+        disclaimer.enabled = false;
+    }
+    public IEnumerator level1(float x)
     {
         //Print the time of when the function is first called.
         Targeted.GetComponent<Renderer>().material.color = new Color(0.7710f, 0.9339f, 0.1533f, 1f);
         Debug.Log("Started Coroutine at timestamp : " + Time.time);
+       
         int limiter = 1;
         int loopCap = 8;
         //yield on a new YieldInstruction that waits for 5 seconds 
@@ -350,15 +452,16 @@ public class Try : MonoBehaviour
             // new WaitForSeconds(1);
     
             yield return StartCoroutine(keepconstvelinlvl1(10f,x));
-            yield return StartCoroutine(PauseGame(5f));
+            yield return StartCoroutine(ShowMessage("You are given 5 seconds to hit the target now", 3f));
+            yield return StartCoroutine(PauseGame(5f,x));
             yield return StartCoroutine(Colorchangeinlvl1(3f));
             
                 
-            Debug.Log("done with wait");
+        
             Debug.Log(rb.velocity);
             Vector3 holdr = rb.velocity / rb.velocity.magnitude;
                 //  Vector3 tempVect = new Vector3(x, y * 0, z );
-                rb.velocity = rb.velocity.normalized * x;
+                rb.velocity =holdr* x;
                 Debug.Log(rb.velocity.magnitude);
                 Vector3 holdrb = trb.velocity / trb.velocity.magnitude;
                 // Vector3 temprb = new Vector3(x , y * 0, c);
@@ -384,17 +487,18 @@ public class Try : MonoBehaviour
             limiter++;
             }
  //After we have waited 5 seconds print the time again.
-        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+      
         // StartPause();
       
         ScoreManager.instance.AddLevel(level);
         level++;
-      //  go.SetActive(true);
+        ScoreManager.instance.refreshchance();
+        //  go.SetActive(true);
         newTargetobjinlevel2.SetActive(true);
 
-   //     newTargetobjinlevel2.GetComponent<Renderer>().material.color = Color.white;
-  //      Targeted.GetComponent<Renderer>().material.color = Color.white;
-     
+        //     newTargetobjinlevel2.GetComponent<Renderer>().material.color = Color.white;
+        //      Targeted.GetComponent<Renderer>().material.color = Color.white;
+        ScoreManager.instance.readlines();
         StartCoroutine(level2(1f));
         yield return null;
 
@@ -422,7 +526,8 @@ public class Try : MonoBehaviour
         while (limiter < loopCap)
         {
             yield return StartCoroutine(keepconstvelinlvl2(10f, x));
-            yield return StartCoroutine(PauseGame(5f));
+            yield return StartCoroutine(ShowMessage("You are given 5 seconds to hit the target now", 3f));
+            yield return StartCoroutine(PauseGame(5f,x));
     
             yield return StartCoroutine(Colorchangeinlvl2(3f));
      
@@ -464,7 +569,7 @@ public class Try : MonoBehaviour
         //StartPause2(newTargetobjinlevel2);
         ScoreManager.instance.AddLevel(level);
         level++;
-       
+        ScoreManager.instance.refreshchance();
         StartCoroutine(level3(1f));
        // displayset2();
     }
@@ -478,12 +583,12 @@ public class Try : MonoBehaviour
     IEnumerator level3(float x)
     {
         //Print the time of when the function is first called.
-        yield return StartCoroutine(Colorchangeinlvl3(3f));
+       
         Debug.Log("level3 says i am here");
      //   ge.SetActive(true);
         newTargetobjinlevel3.SetActive(true);
-
-       rigidbodyofnewtargetobjinlevel3= newTargetobjinlevel3.GetComponent<Rigidbody>();
+        yield return StartCoroutine(Colorchangeinlvl3(3f));
+        rigidbodyofnewtargetobjinlevel3 = newTargetobjinlevel3.GetComponent<Rigidbody>();
         rigidbodyofnewtargetobjinlevel3.velocity = new Vector3(1f, 0f, -1f);
        // ce = ge.GetComponent<Rigidbody>();
       //  ce.velocity = new Vector3(-1f, 0f, 1f);
@@ -496,7 +601,8 @@ public class Try : MonoBehaviour
         while (limiter < loopCap)
         {
             yield return StartCoroutine(keepconstvelinlvl3(10f, x));
-            yield return StartCoroutine(PauseGame(5f));
+            yield return StartCoroutine(ShowMessage("You are given 5 seconds to hit the target now", 3f));
+            yield return StartCoroutine(PauseGame(5f,x));
             yield return StartCoroutine(Colorchangeinlvl3(3f));
             Vector3 holdr = rb.velocity / rb.velocity.magnitude;
             //  Vector3 tempVect = new Vector3(x, y * 0, z );
@@ -538,7 +644,7 @@ public class Try : MonoBehaviour
         }
         ScoreManager.instance.AddLevel(level);
         level++;
-
+        ScoreManager.instance.refreshchance();
         StartCoroutine(level4(1f));
         //  Time.timeScale = 0f;
 
@@ -549,12 +655,12 @@ public class Try : MonoBehaviour
     IEnumerator level4(float x)
     {
         //Print the time of when the function is first called.
-        yield return StartCoroutine(Colorchangeinlvl4(3f));
+       
         Debug.Log("level4 says i am here");
  
         newTargetobjinlevel4.SetActive(true);
-        
-        rigidbodyofnewtargetobjinlevel4= newTargetobjinlevel4.GetComponent<Rigidbody>();
+        yield return StartCoroutine(Colorchangeinlvl4(3f));
+        rigidbodyofnewtargetobjinlevel4 = newTargetobjinlevel4.GetComponent<Rigidbody>();
         rigidbodyofnewtargetobjinlevel4.velocity = new Vector3(-1f, 0f, 1f);
 
         rigidbodyoffalsetarget2.velocity = rigidbodyoffalsetarget2.velocity.normalized * x;
@@ -570,7 +676,8 @@ public class Try : MonoBehaviour
         while (limiter < loopCap)
         {
             yield return StartCoroutine(keepconstvelinlvl4(10f, x));
-            yield return StartCoroutine(PauseGame(5f));
+            yield return StartCoroutine(ShowMessage("You are given 5 seconds to hit the target now", 3f));
+            yield return StartCoroutine(PauseGame(5f,x));
 
             yield return StartCoroutine(Colorchangeinlvl4(3f));
             Vector3 holdr = rb.velocity / rb.velocity.magnitude;
@@ -619,18 +726,18 @@ public class Try : MonoBehaviour
         Debug.Log("Finished Coroutine at timestamp : " + Time.time);
         ScoreManager.instance.AddLevel(level);
         level++;
-
+        ScoreManager.instance.refreshchance();
         StartCoroutine(level5(1f));
     }
     IEnumerator level5(float x)
     {
         //Print the time of when the function is first called.
-        yield return StartCoroutine(Colorchangeinlvl5(3f));
+     
         Debug.Log("level5 says i am here");
       
         newTargetobjinlevel5.SetActive(true);
-       
-       
+        yield return StartCoroutine(Colorchangeinlvl5(3f));
+
         rigidbodyofnewtargetobjinlevel5 = newTargetobjinlevel5.GetComponent<Rigidbody>();
         rigidbodyofnewtargetobjinlevel5.velocity = new Vector3(-1f, 0f, 1f);
 
@@ -641,7 +748,8 @@ public class Try : MonoBehaviour
         while (limiter < loopCap)
         {
             yield return StartCoroutine(keepconstvelinlvl5(10f, x));
-            yield return StartCoroutine(PauseGame(5f));
+            yield return StartCoroutine(ShowMessage("You are given 5 seconds to hit the target now", 3f));
+            yield return StartCoroutine(PauseGame(5f,x));
             yield return StartCoroutine(Colorchangeinlvl5(3f));
             Vector3 holdr = rb.velocity / rb.velocity.magnitude;
             //  Vector3 tempVect = new Vector3(x, y * 0, z );

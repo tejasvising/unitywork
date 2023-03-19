@@ -39,7 +39,7 @@ public class TargetShooter : MonoBehaviour
                     //score++;
                     //  score++;
                     //  scoreText.text = "Score:" + score;
-                    target.Hit();
+                    //target.Hit();
 
                     ScoreManager.instance.AddPoint();
                 }
