@@ -1,5 +1,6 @@
 
 using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
@@ -48,7 +49,11 @@ public class Try : MonoBehaviour
     int level = 1;
 
     // [SerializeField] BoxCollider col;
-
+   public int Randum()
+    {
+      var rnd = new System.Random();
+        return rnd.Next(1, 3);
+    }
 
     void Start()
     {
@@ -148,11 +153,12 @@ public class Try : MonoBehaviour
         Time.timeScale = 1f;
 
         Targeted.GetComponent<Renderer>().material.color = new Color(0.7710f, 0.9339f, 0.1533f, 1f);
-        rb.velocity = new Vector3(-1f, 0f, 1f);
+       
+        rb.velocity = new Vector3(Randum()==1?1:-1, 0f, Randum() == 1 ? 1 : -1);
 
-        rigidbodyoffalsetarget2.velocity = new Vector3(-1f, 0f, 1f);
+        rigidbodyoffalsetarget2.velocity = new Vector3(Randum() == 1 ? 1 : -1, 0f, Randum() == 1 ? 1 : -1);
         //  rb2.velocity = new Vector3(-1f, 0f, 1f);
-        trb.velocity = new Vector3(-1f, 0f, 1f);
+        trb.velocity = new Vector3(Randum() == 1 ? 1 : -1, 0f, Randum() == 1 ? 1 : -1);
         var x = 1f;
         StartCoroutine(level1(x));
     }
@@ -262,11 +268,11 @@ public class Try : MonoBehaviour
         rb = Sphere.GetComponent<Rigidbody>();
      
         rigidbodyoffalsetarget2 = FalseTarget2.GetComponent<Rigidbody>();
-        rb.velocity =new Vector3(-1f,0f,1f);
+        rb.velocity =new Vector3(Randum() == 1 ? 1 : -1, 0f, Randum() == 1 ? 1 : -1);
        
-        rigidbodyoffalsetarget2.velocity = new Vector3(-1f, 0f, 1f);
+        rigidbodyoffalsetarget2.velocity = new Vector3(Randum() == 1 ? 1 : -1, 0f, Randum() == 1 ? 1 : -1);
         //  rb2.velocity = new Vector3(-1f, 0f, 1f);
-        trb.velocity = new Vector3(1f, 0f, -1f);
+        trb.velocity = new Vector3(Randum() == 1 ? 1 : -1, 0f, Randum() == 1 ? 1 : -1);
         var x = 1f;
        
        
@@ -556,7 +562,7 @@ public class Try : MonoBehaviour
         rigbodyofnewTargetobjinlevel2 = newTargetobjinlevel2.GetComponent<Rigidbody>();
    //  cl=   go.GetComponent<Rigidbody>();
    // cl.velocity = new Vector3(-1f, 0, 1f);
-        rigbodyofnewTargetobjinlevel2.velocity = new Vector3(-1f, 0f, 1f);
+        rigbodyofnewTargetobjinlevel2.velocity = new Vector3(Randum() == 1 ? 1 : -1, 0f, Randum() == 1 ? 1 : -1);
         Debug.Log("Started Coroutine at timestamp : " + Time.time);
         int limiter = 1;
 
@@ -629,7 +635,7 @@ public class Try : MonoBehaviour
         newTargetobjinlevel3.SetActive(true);
         yield return StartCoroutine(Colorchangeinlvl3(3f));
         rigidbodyofnewtargetobjinlevel3 = newTargetobjinlevel3.GetComponent<Rigidbody>();
-        rigidbodyofnewtargetobjinlevel3.velocity = new Vector3(1f, 0f, -1f);
+        rigidbodyofnewtargetobjinlevel3.velocity = new Vector3(Randum() == 1 ? 1 : -1, 0f, Randum() == 1 ? 1 : -1);
        // ce = ge.GetComponent<Rigidbody>();
       //  ce.velocity = new Vector3(-1f, 0f, 1f);
         
@@ -701,7 +707,7 @@ public class Try : MonoBehaviour
         newTargetobjinlevel4.SetActive(true);
         yield return StartCoroutine(Colorchangeinlvl4(3f));
         rigidbodyofnewtargetobjinlevel4 = newTargetobjinlevel4.GetComponent<Rigidbody>();
-        rigidbodyofnewtargetobjinlevel4.velocity = new Vector3(-1f, 0f, 1f);
+        rigidbodyofnewtargetobjinlevel4.velocity = new Vector3(Randum() == 1 ? 1 : -1, 0f, Randum() == 1 ? 1 : -1);
 
         rigidbodyoffalsetarget2.velocity = rigidbodyoffalsetarget2.velocity.normalized * x;
 
@@ -779,7 +785,7 @@ public class Try : MonoBehaviour
         yield return StartCoroutine(Colorchangeinlvl5(3f));
 
         rigidbodyofnewtargetobjinlevel5 = newTargetobjinlevel5.GetComponent<Rigidbody>();
-        rigidbodyofnewtargetobjinlevel5.velocity = new Vector3(-1f, 0f, 1f);
+        rigidbodyofnewtargetobjinlevel5.velocity = new Vector3(Randum() == 1 ? 1 : -1, 0f, Randum() == 1 ? 1 : -1);
 
         Debug.Log("Started Coroutine at timestamp : " + Time.time);
         int limiter = 1;
