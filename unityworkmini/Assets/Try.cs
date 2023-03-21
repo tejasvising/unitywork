@@ -11,9 +11,14 @@ public class Try : MonoBehaviour
 {
     [SerializeField] Camera cam;
     [SerializeField] TextMeshProUGUI disclaimer;
+    [SerializeField] TextMeshProUGUI errormessage;
+    [SerializeField] TextMeshProUGUI info;
     public TMP_InputField InputField;
    // public Text input;
     public Button button;
+    public Button button1;
+    public Button button2;
+
     // Start is called before the first frame update
     private Rigidbody rb;
  
@@ -86,15 +91,22 @@ public class Try : MonoBehaviour
        
         ScoreManager.instance.onButton();
         //input.DeactivateInputField();
-        InputField.gameObject.SetActive(false);
-        // Destroy(InputField.gameobject);
-        Destroy(button.gameObject);
-      
-        StartCoroutine(Colorchangeinstart(5f));
+        if (ScoreManager.instance.returnerrorstatus())
+        {
+            InputField.gameObject.SetActive(false);
+            // Destroy(InputField.gameobject);
+            Destroy(button.gameObject);
+            Destroy(button1.gameObject);
+            Destroy(button2.gameObject);
+            info.enabled = false;
+            errormessage.enabled = false;
+            StartCoroutine(Colorchangeinstart(5f));
+        }
+        ScoreManager.instance.changeerrorstatus();
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log(SceneManager.GetActiveScene().name);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -254,7 +266,7 @@ public class Try : MonoBehaviour
        
         rigidbodyoffalsetarget2.velocity = new Vector3(-1f, 0f, 1f);
         //  rb2.velocity = new Vector3(-1f, 0f, 1f);
-        trb.velocity = new Vector3(-1f, 0f, 1f);
+        trb.velocity = new Vector3(1f, 0f, -1f);
         var x = 1f;
        
        
@@ -373,10 +385,10 @@ public class Try : MonoBehaviour
     public IEnumerator PauseGame(float pauseTime,float velocity)
     {
         //    Debug.Log("Inside PauseGame()");
-        if (velocity <= 6) pauseTime = 3f;
+        if (velocity <= 6) pauseTime = 3f; int accuracy = 0;
         Debug.Log("Started Coroutine at timestamp : " + Time.time);
         var t = Time.realtimeSinceStartup;float responseTime=5f;
-        Time.timeScale = 0f;
+        Time.timeScale = 0f;bool correcthit = false;
         int cnt = 0;bool hitdone = false;
         float pauseEndTime = Time.realtimeSinceStartup + pauseTime;
         while (Time.realtimeSinceStartup < pauseEndTime)
@@ -397,7 +409,11 @@ public class Try : MonoBehaviour
                     
                     if (falsetarget != null)
                     {
-                        falsetarget.collide();
+                       if (ScoreManager.instance.returnChance() == 0) {
+                            ScoreManager.instance.WriteCSV(velocity, responseTime, accuracy,true);
+                        }
+                            falsetarget.collide();
+                        
                     }
                     // Debug.Log(target);
                     if (target != null)
@@ -408,7 +424,7 @@ public class Try : MonoBehaviour
                         //  score++;
                         //  scoreText.text = "Score:" + score;
                         //target.Hit();
-
+                        correcthit = true;
                         ScoreManager.instance.AddPoint();
                     }
                 }
@@ -417,11 +433,35 @@ public class Try : MonoBehaviour
           //  Debug.Log(Time.realtimeSinceStartup-t);
             yield return 0;
         }
-        ScoreManager.instance.WriteCSV(velocity, responseTime);
+        
+        if (ScoreManager.instance.returnChance() == 3 && correcthit==true ) { accuracy = 100; }
+        else if(ScoreManager.instance.returnChance() == 2 && correcthit == true)
+        {
+            accuracy = 75;
+           
+        }
+        else if(ScoreManager.instance.returnChance() == 1 && correcthit == true)
+        {
+            accuracy = 50;
+        }
+        else if(ScoreManager.instance.returnChance() == 0 && correcthit == true)
+        {
+            accuracy = 25;
+        }
+        if (cnt == 0)
+        {
+            ScoreManager.instance.WriteCSV(velocity, responseTime, accuracy, false);
+        }
+        else
+        {
+            ScoreManager.instance.WriteCSV(velocity, responseTime, accuracy, true);
+        }
+        
+        ScoreManager.instance.readlines();
         //  if(hitdone==false) ScoreManager.instance.WriteCSV(velocity, 5f);
         ScoreManager.instance.resethittime();
         Time.timeScale = 1f;
-     
+        ScoreManager.instance.refreshchance();
     }
     IEnumerator ShowMessage(string message, float delay)
     {
@@ -452,7 +492,7 @@ public class Try : MonoBehaviour
             // new WaitForSeconds(1);
     
             yield return StartCoroutine(keepconstvelinlvl1(10f,x));
-            yield return StartCoroutine(ShowMessage("You are given 5 seconds to hit the target now", 3f));
+            yield return StartCoroutine(ShowMessage("You are given time to hit the target now", 3f));
             yield return StartCoroutine(PauseGame(5f,x));
             yield return StartCoroutine(Colorchangeinlvl1(3f));
             
@@ -498,7 +538,7 @@ public class Try : MonoBehaviour
 
         //     newTargetobjinlevel2.GetComponent<Renderer>().material.color = Color.white;
         //      Targeted.GetComponent<Renderer>().material.color = Color.white;
-        ScoreManager.instance.readlines();
+        
         StartCoroutine(level2(1f));
         yield return null;
 
