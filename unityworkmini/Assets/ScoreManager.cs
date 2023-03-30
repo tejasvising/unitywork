@@ -43,6 +43,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI chanceText;
     [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] TextMeshProUGUI hittimeText;
+    
     int score = 0;
     int chance = 3;
     int level = 1;
@@ -60,6 +61,8 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = "Score:"+ score.ToString()  ;
         filename = Application.dataPath + "/test.csv";
         Debug.Log(myPlayer);
+        chanceText.enabled = false;
+        
     }
     void Update()
     {
@@ -73,11 +76,26 @@ public class ScoreManager : MonoBehaviour
     }
     public void displayhittime(float timeElapsed)
     {
-        hittimeText.text = "HitTime:" + timeElapsed.ToString();
+        hittimeText.text = timeElapsed.ToString();
     }
-   public void AddPoint()
+   public void AddPoint(int ch)
     {
-        score += 10;
+        if (ch == 3)
+        {
+            score += 10;
+        }
+       else if (ch == 2)
+        {
+            score += 7;
+        }
+        else if (ch == 1)
+        {
+            score += 5;
+        }
+        else if (ch == 0)
+        {
+            score += 3;
+        }
         scoreText.text = "Score:"+ score.ToString();
         
     }
@@ -122,6 +140,7 @@ public class ScoreManager : MonoBehaviour
         levelText.text = "Level:" + level.ToString();
         headlineCSV(level);
     }
+   
     public int[] returnScoreCard()
     {
         return scorecard;

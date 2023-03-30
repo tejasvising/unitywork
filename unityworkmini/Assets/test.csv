@@ -1,28 +1,327 @@
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
-,
+Player:Om,,
+Level:1,,
+Velocity, Score, Response time
+1,10,1.272192
+3,10,5
+6,10,5
+9,10,5
+12,10,5
+15,10,5
+18,10,5
+Level:2,,
+Velocity, Score, Response time
+1,30,0.5489197
+3,50,0.6654663
+6,50,5
+Player:Tejasvi,,
+Level:1,,
+Velocity, Score, Response time
+1,0,1.080967
+Player:Namemy,,
+Level:1,,
+Velocity, Score, Response time
+1,0,5
+3,10,0.9235687
+6,10,1.258789
+9,10,0.697197
+12,10,5
+15,10,5
+18,10,5
+Level:2,,
+Velocity, Score, Response time
+1,30,0.589386
+3,40,0.831543
+Player:HELLO,,
+Level:1,,
+Velocity, Score, Response time
+1,0,5
+3,0,5
+6,0,5
+9,0,5
+12,0,5
+15,0,5
+18,0,5
+Level:2,,
+Velocity, Score, Response time
+1,10,2.44426
+3,20,1.148117
+Player:Tej,,
+Level:1,,
+Velocity, Score, Response time
+1,10,0.8884983
+3,10,5
+Player:Tejas
+Level:1
+Velocity, Score, Response time
+1,0,5
+Player:Tete
+Level:1
+Velocity, Score, Response time
+1,0,5
+3,0,5
+6,0,5
+9,0,5
+12,0,5
+15,0,5
+18,0,5
+Level:2
+Velocity, Score, Response time
+1,0,5
+3,0,5
+6,0,5
+9,10,3.41597
+12,10,5
+15,10,5
+18,10,5
+Level:3
+Velocity, Score, Response time
+1,10,5
+3,10,5
+6,10,5
+9,10,5
+12,10,0.5548401
+15,10,0.5792236
+18,10,5
+Level:4
+Velocity, Score, Response time
+1,20,0.6400452
+3,20,5
+6,30,0.7112427
+9,30,5
+12,30,5
+15,30,5
+18,30,5
+Level:5
+Velocity, Score, Response time
+1,50,0.6864014
+3,50,5
+6,50,5
+9,50,5
+12,50,5
+15,50,5
+18,50,5
+Player:Amisha
+Level:1
+Velocity, Score, Response time
+1,0,5
+Player:Tw
+Level:1
+Velocity, Score, Response time
+1,0,5,,100%
+3,0,5,,100%
+6,10,1.379471,,100%
+9,10,0.7090912,,0%
+9,10,0.7090912,,0%
+Player:Tewr
+Level:1
+Velocity, Score, Response time, Accuracy
+1,0,1.597446,,50%
+Player:QER
+Level:1
+Velocity, Score, Response time, ,Accuracy
+1,0,0.692276,,50%
+3,10,0.7254562,,25%
+6,10,0.697876,,0%
+Player:UUUU
+Level:1
+Velocity, Score, Response time, ,Accuracy
+Player:Teq
+Level:1
+Velocity, Score, Response time, ,Accuracy
+1,0,5,,NA
+3,0,0.6626129,,75%
+Player:finl
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,10,2.581181,100%
+3,10,0.9153099,0%
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+Player:
+Level:1
+Velocity, Score, Response time ,Accuracy
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+Player:SAn
+Level:1
+Velocity, Score, Response time ,Accuracy
+Player:SAn
+Level:1
+Velocity, Score, Response time ,Accuracy
+Player:SAn
+Level:1
+Velocity, Score, Response time ,Accuracy
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+Player:Tejasvo
+Level:1
+Velocity, Score, Response time ,Accuracy
+Player:Tejadvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+Player:QW
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,0,0.9918594,0%
+3,0,5,NA
+6,0,5,NA
+Player:Fee
+Level:1
+Velocity, Score, Response time ,Accuracy
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,0,5,NA
+3,10,0.6157761,100%
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,10,1.318411,100%
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,10,0.6653233,100%
+3,10,5,NA
+6,10,5,NA
+9,20,0.7626724,100%
+12,20,5,NA
+15,20,5,NA
+18,20,5,NA
+Level:2
+Velocity, Score, Response time, Accuracy
+1,40,0.6923981,100%
+3,50,1.474289,75%
+6,60,0.7728882,75%
+Player:xiv
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,10,2.764137,100%
+Player:xiv
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,0,5,NA
+3,10,0.9063759,100%
+6,10,5,NA
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,10,0.6142921,100%
+Player:xiv
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,10,0.0262146,100%
+3,20,0.8284492,100%
+6,30,0.551857,100%
+9,40,0.5080948,100%
+12,50,0.6913681,100%
+15,60,1.634705,75%
+18,70,0.4976501,75%
+Level:2
+Velocity, Score, Response time, Accuracy
+Player:xxxxx
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,10,0.7669659,100%
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,10,0.8718872,75%
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,0,5,NA
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,0,5,NA
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,10,1.062305,100%
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,0,5,NA
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,10,0.827404,100%
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,0,5,NA
+3,10,0.7721863,100%
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,10,0.668335,100%
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,10,1.059309,100%
+3,20,0.7925262,100%
+6,70,1.037949,100%
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,10,0.718998,100%
+3,20,1.619099,100%
+6,20,5,NA
+9,30,2.364304,100%
+12,30,5,NA
+15,30,5,NA
+18,30,5,NA
+Level:2
+Velocity, Score, Response time, Accuracy
+1,40,0.9403839,100%
+3,50,1.040573,100%
+6,70,0.6479034,100%
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,10,0.9831047,100%
+3,10,0.6694412,0%
+6,10,5,NA
+9,10,5,NA
+12,10,5,NA
+15,10,5,NA
+18,10,5,NA
+Level:2
+Velocity, Score, Response time, Accuracy
+1,10,2.001938,0%
+3,17,0.8266449,75%
+6,27,0.85495,100%
+9,44,0.5191956,75%
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,0,5,NA
+3,0,5,NA
+6,0,5,NA
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,10,1.340782,100%
+3,10,5,NA
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+Player:Tejasvi
+Level:1
+Velocity, Score, Response time ,Accuracy
+1,0,2.119125,0%

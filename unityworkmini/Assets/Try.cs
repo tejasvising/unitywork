@@ -12,6 +12,9 @@ public class Try : MonoBehaviour
 {
     [SerializeField] Camera cam;
     [SerializeField] TextMeshProUGUI disclaimer;
+    [SerializeField] TextMeshProUGUI rule;
+    [SerializeField] TextMeshProUGUI levelText;
+    [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI errormessage;
     [SerializeField] TextMeshProUGUI info;
     public TMP_InputField InputField;
@@ -19,7 +22,7 @@ public class Try : MonoBehaviour
     public Button button;
     public Button button1;
     public Button button2;
-
+    public Image img;
     // Start is called before the first frame update
     private Rigidbody rb;
  
@@ -60,7 +63,9 @@ public class Try : MonoBehaviour
        
         Sphere = GameObject.Find("FalseTarget");
         Targeted = GameObject.Find("Target");
-       
+        scoreText.enabled = false;
+        levelText.enabled = false;
+        img.gameObject.SetActive(false);
         FalseTarget2 = GameObject.Find("FalseTarget2");
      //   go = GameObject.Instantiate(Sphere);
         newTargetobjinlevel2 = GameObject.Instantiate(Targeted);
@@ -85,7 +90,7 @@ public class Try : MonoBehaviour
         rb = Sphere.GetComponent<Rigidbody>();
 
         rigidbodyoffalsetarget2 = FalseTarget2.GetComponent<Rigidbody>();
-     
+        rule.enabled = false;
        
         //Invoke("feedDog", 5);
     //  yield return  StartCoroutine(level1(x));
@@ -105,7 +110,8 @@ public class Try : MonoBehaviour
             Destroy(button2.gameObject);
             info.enabled = false;
             errormessage.enabled = false;
-            StartCoroutine(Colorchangeinstart(5f));
+            StartCoroutine(DisplayRules(60f));
+           
         }
         ScoreManager.instance.changeerrorstatus();
     }
@@ -138,6 +144,27 @@ public class Try : MonoBehaviour
 
            
        // }
+    }
+    public IEnumerator DisplayRules(float pauseTime)
+    {
+
+        Targeted.GetComponent<Renderer>().material.color = Color.white;
+        float pauseEndTime = Time.realtimeSinceStartup + pauseTime;
+        
+        rule.enabled = true;
+        img.gameObject.SetActive(true);
+        Time.timeScale = 0f;
+        while (Time.realtimeSinceStartup < pauseEndTime)
+        {
+
+            yield return 0;
+        }
+        Time.timeScale = 1f;
+        img.gameObject.SetActive(false);
+        rule.enabled = false;
+        scoreText.enabled = true;
+        levelText.enabled = true;
+        StartCoroutine(Colorchangeinstart(5f));
     }
     public IEnumerator Colorchangeinstart(float pauseTime)
     {
@@ -391,6 +418,8 @@ public class Try : MonoBehaviour
     public IEnumerator PauseGame(float pauseTime,float velocity)
     {
         //    Debug.Log("Inside PauseGame()");
+        int chanceforruntime = 3;
+        GameObject[] targets = new GameObject[5];int idx = 0;
         if (velocity <= 6) pauseTime = 3f; int accuracy = 0;
         Debug.Log("Started Coroutine at timestamp : " + Time.time);
         var t = Time.realtimeSinceStartup;float responseTime=5f;
@@ -410,6 +439,8 @@ public class Try : MonoBehaviour
                 {
                     cnt++;hitdone = true;
                     Target target = hit.collider.gameObject.GetComponent<Target>();
+        
+                    Debug.Log(hit.collider.gameObject);
                     FalseTarget falsetarget = hit.collider.gameObject.GetComponent<FalseTarget>();
                     if (cnt == 1) { responseTime = Time.realtimeSinceStartup - t; }
                     
@@ -418,6 +449,7 @@ public class Try : MonoBehaviour
                        if (ScoreManager.instance.returnChance() == 0) {
                             ScoreManager.instance.WriteCSV(velocity, responseTime, accuracy,true);
                         }
+                        chanceforruntime -= 1;
                             falsetarget.collide();
                         
                     }
@@ -425,13 +457,23 @@ public class Try : MonoBehaviour
                     if (target != null)
                     {
                         // Destroy(target.gameObject);
-
+                        int pos = System.Array.IndexOf(targets, hit.collider.gameObject);
+                        if (pos == -1)
+                        {
+                            targets[idx] = hit.collider.gameObject;
+                            idx++;
+                            correcthit = true;
+                            ScoreManager.instance.AddPoint(chanceforruntime);
+                            chanceforruntime = 3;
+                        }
                         //score++;
                         //  score++;
                         //  scoreText.text = "Score:" + score;
                         //target.Hit();
-                        correcthit = true;
-                        ScoreManager.instance.AddPoint();
+                        //  script.enabled = false;
+                        //hit.collider.gameObject.SetActive(false);
+
+                       
                     }
                 }
             }
@@ -468,6 +510,10 @@ public class Try : MonoBehaviour
         ScoreManager.instance.resethittime();
         Time.timeScale = 1f;
         ScoreManager.instance.refreshchance();
+        for(int i = 0; i < idx; i++)
+        {
+            targets[i].SetActive(true);
+        }
     }
     IEnumerator ShowMessage(string message, float delay)
     {

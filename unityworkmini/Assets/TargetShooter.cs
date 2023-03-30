@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,12 +45,13 @@ public class TargetShooter : MonoBehaviour
                 }
             }
         }
-        /*  if (Input.GetKeyDown(KeyCode.Mouse0))
-           {
-
-               Debug.Log("ab");
-           }*/
+       
 
     }
    
-}
+}*/
+/*  if (Input.GetKeyDown(KeyCode.Mouse0))
+          {
+
+              Debug.Log("ab");
+          }*/
