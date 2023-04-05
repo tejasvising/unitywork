@@ -72,7 +72,7 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     public void resethittime()
     {
-        hittimeText.text = "HitTime:";
+        hittimeText.text = "";
     }
     public void displayhittime(float timeElapsed)
     {

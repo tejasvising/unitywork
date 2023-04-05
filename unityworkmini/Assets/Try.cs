@@ -415,12 +415,13 @@ public class Try : MonoBehaviour
         
 
     }
-    public IEnumerator PauseGame(float pauseTime,float velocity)
+    public IEnumerator PauseGame(float pauseTime,float velocity,int level)
     {
         //    Debug.Log("Inside PauseGame()");
         int chanceforruntime = 3;
         GameObject[] targets = new GameObject[5];int idx = 0;
-        if (velocity <= 6) pauseTime = 3f; int accuracy = 0;
+        if (velocity <= 6 && level > 3) pauseTime = level; 
+        if (velocity <= 6 && level<=3) pauseTime = 3f; int accuracy = 0;
         Debug.Log("Started Coroutine at timestamp : " + Time.time);
         var t = Time.realtimeSinceStartup;float responseTime=5f;
         Time.timeScale = 0f;bool correcthit = false;
@@ -545,7 +546,7 @@ public class Try : MonoBehaviour
     
             yield return StartCoroutine(keepconstvelinlvl1(10f,x));
             yield return StartCoroutine(ShowMessage("You are given time to hit the target now", 3f));
-            yield return StartCoroutine(PauseGame(5f,x));
+            yield return StartCoroutine(PauseGame(5f,x,1));
             yield return StartCoroutine(Colorchangeinlvl1(3f));
             
                 
@@ -619,7 +620,7 @@ public class Try : MonoBehaviour
         {
             yield return StartCoroutine(keepconstvelinlvl2(10f, x));
             yield return StartCoroutine(ShowMessage("You are given 5 seconds to hit the target now", 3f));
-            yield return StartCoroutine(PauseGame(5f,x));
+            yield return StartCoroutine(PauseGame(5f,x,2));
     
             yield return StartCoroutine(Colorchangeinlvl2(3f));
      
@@ -694,7 +695,7 @@ public class Try : MonoBehaviour
         {
             yield return StartCoroutine(keepconstvelinlvl3(10f, x));
             yield return StartCoroutine(ShowMessage("You are given 5 seconds to hit the target now", 3f));
-            yield return StartCoroutine(PauseGame(5f,x));
+            yield return StartCoroutine(PauseGame(5f,x,3));
             yield return StartCoroutine(Colorchangeinlvl3(3f));
             Vector3 holdr = rb.velocity / rb.velocity.magnitude;
             //  Vector3 tempVect = new Vector3(x, y * 0, z );
@@ -769,7 +770,7 @@ public class Try : MonoBehaviour
         {
             yield return StartCoroutine(keepconstvelinlvl4(10f, x));
             yield return StartCoroutine(ShowMessage("You are given 5 seconds to hit the target now", 3f));
-            yield return StartCoroutine(PauseGame(5f,x));
+            yield return StartCoroutine(PauseGame(5f,x,4));
 
             yield return StartCoroutine(Colorchangeinlvl4(3f));
             Vector3 holdr = rb.velocity / rb.velocity.magnitude;
@@ -841,7 +842,7 @@ public class Try : MonoBehaviour
         {
             yield return StartCoroutine(keepconstvelinlvl5(10f, x));
             yield return StartCoroutine(ShowMessage("You are given 5 seconds to hit the target now", 3f));
-            yield return StartCoroutine(PauseGame(5f,x));
+            yield return StartCoroutine(PauseGame(5f,x,5));
             yield return StartCoroutine(Colorchangeinlvl5(3f));
             Vector3 holdr = rb.velocity / rb.velocity.magnitude;
             //  Vector3 tempVect = new Vector3(x, y * 0, z );
